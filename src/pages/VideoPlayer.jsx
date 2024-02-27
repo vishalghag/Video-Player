@@ -26,8 +26,8 @@ const VideoPlayer = () => {
   };
 
   const showMiniMovie = () => {
-    setShowMovie(false);
-    if (searchMovie.length === 0 || null) setShowMovie(true);
+    setShowMovie(true);
+    if (searchMovie.length === 0 || null) setShowMovie(false);
   };
 
   return (
@@ -35,6 +35,7 @@ const VideoPlayer = () => {
       <Header
         searchFilterContentFn={searchFilterContentFn}
         showMiniMovie={showMiniMovie}
+        currentMovie={currentMovie}
       />
 
       <div className="flex flex-col items-center justify-center w-full h-full">
@@ -55,15 +56,22 @@ const VideoPlayer = () => {
                 </div>
               </div>
             ))
-          : showMovie && (
+          : !showMovie && (
               <div
-                className="relative w-[300px] h-[300px] mt-20 "
+                className="relative w-[300px] h-[300px] mt-20 cursor-pointer"
                 onClick={() => setShowMovie(true)}
               >
                 <img src={folder} alt="folder" />
                 <span>Click on Folder to View Movie PlayList</span>
               </div>
             )}
+        {showMovie && (
+          <PlayList
+            currentMovie={currentMovie}
+            setCurrentMovie={setCurrentMovie}
+            searchMovie={searchMovie}
+          />
+        )}
       </div>
     </>
   );

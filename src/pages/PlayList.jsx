@@ -3,40 +3,55 @@ import { videoList } from "../constant/data";
 import ReactPlayer from "react-player";
 import logo from "../images/logo.jpeg";
 
-const PlayList = () => {
-  useEffect(() => {}, []);
+const PlayList = ({ currentMovie, setCurrentMovie, searchMovie }) => {
+  useEffect(() => {
+    console.log(currentMovie, "lhgjgfh");
+  }, [currentMovie]);
 
-  // const handleVideoClick = (id) => {
-  //   videoList.shortMovies.filter((ele) => {
-  //     if (ele.id === id) {
-  //       console.log(currentMovie, "cureen");
-  //       return setCurrentMobvie(ele);
-  //     }
-  //   });
-  // };
+  const handleVideoClick = (id) => {
+    // eslint-disable-next-line array-callback-return
+    videoList.shortMovies.filter((ele) => {
+      if (ele.id === id) {
+        return setCurrentMovie(ele);
+      }
+    });
+  };
 
   return (
     <>
-      {/* <div className="flex flex-row items-center justify-evenly">
-        <div id="middleBox" className=" gap-52">
+      <div className="flex flex-row items-center justify-evenly">
+        <div id="middleBox" className=" mb-[500px]">
           {currentMovie && (
-            <ReactPlayer
-              key={currentMovie.id}
-              width={"400px"}
-              height={"200px"}
-              url={currentMovie.url}
-              controls
-              playing={false}
-            />
+            <>
+              {/* {currentMovie.map((movie) => (
+              
+            ))} */}
+              <div id="one">
+                <ReactPlayer
+                  key={currentMovie[0].id}
+                  url={currentMovie[0].url}
+                  controls
+                  playing={false}
+                />
+                <span className=" text-white font-medium">
+                  {currentMovie[0].name}
+                </span>
+              </div>
+            </>
           )}
           {!currentMovie && (
-            <ReactPlayer
-              width={"400px"}
-              height={"200px"}
-              url={videoList.shortMovies[0].url}
-              controls
-              playing={false}
-            />
+            <>
+              <div id="two">
+                <ReactPlayer
+                  url={videoList.shortMovies[0].url}
+                  controls
+                  playing={false}
+                />
+                <span className=" text-white font-medium">
+                  {videoList.shortMovies[0].name}
+                </span>
+              </div>
+            </>
           )}
         </div>
         <div id="thumb" className="flex flex-col justify-end items-end mt-0">
@@ -51,10 +66,13 @@ const PlayList = () => {
                 src={movie.thumb}
                 alt="thumb"
               />
+              <span className=" text-white font-semibold m-0">
+                {movie.name}
+              </span>
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
     </>
   );
 };
