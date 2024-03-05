@@ -4,10 +4,6 @@ import ReactPlayer from "react-player";
 import logo from "../images/logo.jpeg";
 
 const PlayList = ({ currentMovie, setCurrentMovie, searchMovie }) => {
-  useEffect(() => {
-    console.log(currentMovie, "lhgjgfh");
-  }, [currentMovie]);
-
   const handleVideoClick = (id) => {
     // eslint-disable-next-line array-callback-return
     videoList.shortMovies.filter((ele) => {
@@ -23,18 +19,21 @@ const PlayList = ({ currentMovie, setCurrentMovie, searchMovie }) => {
         <div id="middleBox" className=" mb-[500px]">
           {currentMovie && (
             <>
-              {/* {currentMovie.map((movie) => (
-              
-            ))} */}
               <div id="one">
                 <ReactPlayer
-                  key={currentMovie[0].id}
-                  url={currentMovie[0].url}
+                  key={currentMovie.id}
+                  url={
+                    currentMovie.url === undefined || currentMovie.url === null
+                      ? currentMovie[0].url
+                      : currentMovie.url
+                  }
                   controls
                   playing={false}
                 />
                 <span className=" text-white font-medium">
-                  {currentMovie[0].name}
+                  {currentMovie.name === undefined
+                    ? currentMovie[0].name
+                    : currentMovie.name}
                 </span>
               </div>
             </>
